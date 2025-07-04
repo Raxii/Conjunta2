@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Receta - Deliciosas Recetas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-utensils me-2"></i>Deliciosas Recetas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="receta.html">
+                            <i class="fas fa-book me-1"></i>Receta
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="enviar-receta.html">
+                            <i class="fas fa-plus me-1"></i>Enviar Receta
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Buscar recetas..." aria-label="Buscar">
+                        <button class="btn btn-warning" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">
+                            <i class="fas fa-plus-circle me-2"></i>Enviar tu Receta
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="recipeForm">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="recipeName" class="form-label required-field">Nombre de la Receta</label>
+                                    <input type="text" class="form-control" id="recipeName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="recipeCategory" class="form-label required-field">Categoría</label>
+                                    <select class="form-select" id="recipeCategory" required>
+                                        <option value="">Selecciona una categoría</option>
+                                        <option value="italiana">Italiana</option>
+                                        <option value="mexicana">Mexicana</option>
+                                        <option value="asiatica">Asiática</option>
+                                        <option value="vegetariana">Vegetariana</option>
+                                        <option value="vegana">Vegana</option>
+                                        <option value="postres">Postres</option>
+                                        <option value="ensaladas">Ensaladas</option>
+                                        <option value="sopas">Sopas y Cremas</option>
+                                        <option value="carnes">Carnes</option>
+                                        <option value="pescados">Pescados y Mariscos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="recipeTime" class="form-label required-field">Tiempo (minutos)</label>
+                                    <input type="number" class="form-control" id="recipeTime" min="1" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="recipeServings" class="form-label required-field">Porciones</label>
+                                    <input type="number" class="form-control" id="recipeServings" min="1" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label required-field">Dificultad</label>
+                                    <div class="mt-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="difficulty" id="easy" value="facil" checked>
+                                            <label class="form-check-label" for="easy">Fácil</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="difficulty" id="medium" value="medio">
+                                            <label class="form-check-label" for="medium">Medio</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="difficulty" id="hard" value="dificil">
+                                            <label class="form-check-label" for="hard">Difícil</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calories-section">
+                                <h4><i class="fas fa-calculator me-2"></i>Ingredientes y Calorías</h4>
+                                <p class="text-muted">Agrega los ingredientes y sus calorías por cada 100g para calcular el total</p>
+                                
+                                <div id="ingredientsList">
+                                    <div class="ingredient-row">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="form-label">Ingrediente</label>
+                                                <input type="text" class="form-control ingredient-name" placeholder="Ej: Harina de trigo" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">Cantidad (g)</label>
+                                                <input type="number" class="form-control ingredient-amount" placeholder="200" min="1" required>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Calorías por 100g</label>
+                                                <input type="number" class="form-control ingredient-calories calorie-input" placeholder="364" min="0" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="form-label">Total Cal.</label>
+                                                <input type="text" class="form-control ingredient-total" readonly>
+                                                <button type="button" class="btn btn-remove-ingredient btn-sm mt-1 d-none">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-add-ingredient" id="addIngredientBtn">
+                                    <i class="fas fa-plus me-1"></i>Agregar Ingrediente
+                                </button>
+
+                                <div class="total-calories">
+                                    <i class="fas fa-fire me-2"></i>
+                                    Total de Calorías: <span id="totalCalories">0</span> kcal
+                                    <br>
+                                    <small>Calorías por porción: <span id="caloriesPerServing">0</span> kcal</small>
+                                </div>
+                            </div>
+                            <!-- Instrucciones -->
+                            <div class="mb-4">
+                                <label for="recipeInstructions" class="form-label required-field">Instrucciones de Preparación</label>
+                                <textarea class="form-control" id="recipeInstructions" rows="6" required placeholder="Describe paso a paso cómo preparar la receta"></textarea>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="recipeNotes" class="form-label">Notas/Observaciones</label>
+                                    <textarea class="form-control" id="recipeNotes" rows="3" placeholder="Consejos, variaciones, etc."></textarea>
+                                </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="authorName" class="form-label">Tu nombre</label>
+                                    <input type="text" class="form-control" id="authorName" placeholder="Tu nombre">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="authorEmail" class="form-label">Tu email (opcional)</label>
+                                    <input type="email" class="form-control" id="authorEmail" placeholder="tu@email.com">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">
+                                        Acepto compartir mi receta con la comunidad bajo la licencia Creative Commons
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-info me-2" id="previewBtn">
+                                    <i class="fas fa-eye me-1"></i>Vista Previa
+                                </button>
+                                <button type="submit" class="btn btn-primary me-2">
+                                    <i class="fas fa-paper-plane me-1"></i>Enviar Receta
+                                </button>
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i>Limpiar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="previewSection" class="preview-section d-none">
+                    <h3><i class="fas fa-eye me-2"></i>Vista Previa de tu Receta</h3>
+                    <div id="previewContent"></div>
+                </div>
+
+                <!-- Mensaje de Éxito -->
+                <div id="successMessage" class="alert alert-success mt-4 d-none">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>¡Receta enviada con éxito!</strong> Gracias por tu contribución.
+                    <div class="mt-2">
+                        <a href="index.html" class="btn btn-sm btn-success">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // variable global para contar los ingredientes
+let ingredientCount = 1;
+        // Función para manejar el envío del formulario
+document.addEventListener('DOMContentLoaded', function() {
+    initializeEvents();
+    calculateCalories();
+    loadRecipes(); 
+});
+    // Función para manejar el envío del formulario
+function initializeEvents() {
+    const form = document.getElementById('recipeForm');
+    const addIngredientBtn = document.getElementById('addIngredientBtn');
+    const previewBtn = document.getElementById('previewBtn');
+
+    addIngredientBtn.addEventListener('click', addIngredient);
+
+    form.addEventListener('submit', handleSubmit);
+
+    previewBtn.addEventListener('click', showPreview);
+
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('ingredient-amount') || 
+            e.target.classList.contains('ingredient-calories')) {
+            calculateCalories();
+        }
+    });
+
+    document.getElementById('recipeServings').addEventListener('input', calculateCalories);
+}
+ // Función para manejar el envío del formulario
+function addIngredient() {
+    ingredientCount++;
+    const ingredientsList = document.getElementById('ingredientsList');
+    
+    const newIngredient = document.createElement('div');
+    newIngredient.className = 'ingredient-row';
+    newIngredient.innerHTML = `
+        <div class="row">
+            <div class="col-md-5">
+                <label class="form-label">Ingrediente</label>
+                <input type="text" class="form-control ingredient-name" placeholder="Ej: Azúcar" required>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Cantidad (g)</label>
+                <input type="number" class="form-control ingredient-amount" placeholder="100" min="1" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Calorías por 100g</label>
+                <input type="number" class="form-control ingredient-calories calorie-input" placeholder="387" min="0" required>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Total Cal.</label>
+                <input type="text" class="form-control ingredient-total" readonly>
+                <button type="button" class="btn btn-remove-ingredient btn-sm mt-1" onclick="removeIngredient(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    ingredientsList.appendChild(newIngredient);
+    
+    updateRemoveButtons();
+}
+
+function removeIngredient(button) {
+    const ingredientRow = button.closest('.ingredient-row');
+    ingredientRow.remove();
+    ingredientCount--;
+    updateRemoveButtons();
+    calculateCalories();
+}
+
+function updateRemoveButtons() {
+    const removeButtons = document.querySelectorAll('.btn-remove-ingredient');
+    removeButtons.forEach(button => {
+        if (ingredientCount > 1) {
+            button.classList.remove('d-none');
+        } else {
+            button.classList.add('d-none');
+        }
+    });
+}
+
+function calculateCalories() {
+    const ingredients = document.querySelectorAll('.ingredient-row');
+    let totalCalories = 0;
+
+    ingredients.forEach(ingredient => {
+        const amount = parseFloat(ingredient.querySelector('.ingredient-amount').value) || 0;
+        const caloriesPer100g = parseFloat(ingredient.querySelector('.ingredient-calories').value) || 0;
+        
+        const ingredientTotal = (amount * caloriesPer100g) / 100;
+        
+        ingredient.querySelector('.ingredient-total').value = Math.round(ingredientTotal);
+        
+        totalCalories += ingredientTotal;
+    });
+
+    document.getElementById('totalCalories').textContent = Math.round(totalCalories);
+    
+    const servings = parseInt(document.getElementById('recipeServings').value) || 1;
+    const caloriesPerServing = Math.round(totalCalories / servings);
+    document.getElementById('caloriesPerServing').textContent = caloriesPerServing;
+}
+
+function showPreview() {
+    const previewSection = document.getElementById('previewSection');
+    const previewContent = document.getElementById('previewContent');
+    
+    const recipeName = document.getElementById('recipeName').value;
+    const recipeCategory = document.getElementById('recipeCategory').value;
+    const recipeTime = document.getElementById('recipeTime').value;
+    const recipeServings = document.getElementById('recipeServings').value;
+    const recipeInstructions = document.getElementById('recipeInstructions').value;
+    const totalCalories = document.getElementById('totalCalories').textContent;
+    const caloriesPerServing = document.getElementById('caloriesPerServing').textContent;
+    
+    // Obtener ingredientes
+    const ingredients = [];
+    document.querySelectorAll('.ingredient-row').forEach(row => {
+        const name = row.querySelector('.ingredient-name').value;
+        const amount = row.querySelector('.ingredient-amount').value;
+        const calories = row.querySelector('.ingredient-total').value;
+        
+        if (name && amount) {
+            ingredients.push({ name, amount, calories });
+        }
+    });
+    
+    let ingredientsHTML = '';
+    ingredients.forEach(ingredient => {
+        ingredientsHTML += `
+            <tr>
+                <td>${ingredient.name}</td>
+                <td>${ingredient.amount}g</td>
+                <td>${ingredient.calories} kcal</td>
+            </tr>
+        `;
+    });
+
+    previewContent.innerHTML = `
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">${recipeName || 'Nombre de la receta'}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3"><strong>Categoría:</strong> ${recipeCategory || 'Sin categoría'}</div>
+                    <div class="col-md-3"><strong>Tiempo:</strong> ${recipeTime || 0} min</div>
+                    <div class="col-md-3"><strong>Porciones:</strong> ${recipeServings || 0}</div>
+                    <div class="col-md-3"><strong>Calorías/porción:</strong> ${caloriesPerServing} kcal</div>
+                </div>
+                
+                <h5>Ingredientes:</h5>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Ingrediente</th>
+                            <th>Cantidad</th>
+                            <th>Calorías</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${ingredientsHTML}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-warning">
+                            <th colspan="2">Total</th>
+                            <th>${totalCalories} kcal</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <h5>Instrucciones:</h5>
+                <p>${recipeInstructions || 'Sin instrucciones'}</p>
+            </div>
+        </div>
+    `;
+
+    previewSection.classList.remove('d-none');
+    previewSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    const firstIngredientName = document.querySelector('.ingredient-name').value;
+    if (!firstIngredientName) {
+        alert('Por favor, agrega al menos un ingrediente.');
+        return;
+    }
+    
+    const recipeName = document.getElementById('recipeName').value;
+    const totalCalories = document.getElementById('totalCalories').textContent;
+    
+    const confirmMessage = `¿Estás seguro de que quieres enviar la receta "${recipeName}"?\n\nTotal de calorías: ${totalCalories} kcal\n\n¡Una vez enviada no se puede modificar!`;
+    
+    if (confirm(confirmMessage)) {
+        const newRecipe = {
+            name: recipeName,
+            category: document.getElementById('recipeCategory').value,
+            time: document.getElementById('recipeTime').value,
+            servings: document.getElementById('recipeServings').value,
+            instructions: document.getElementById('recipeInstructions').value,
+            ingredients: [],
+            totalCalories: totalCalories,
+        };
+        document.querySelectorAll('.ingredient-row').forEach(row => {
+            const ingredient = {
+                name: row.querySelector('.ingredient-name').value,
+                amount: row.querySelector('.ingredient-amount').value,
+                calories: row.querySelector('.ingredient-total').value
+            };
+            newRecipe.ingredients.push(ingredient);
+        });
+
+        let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+        recipes.push(newRecipe);
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+
+        document.getElementById('recipeForm').reset();
+        document.getElementById('previewSection').classList.add('d-none');
+        document.getElementById('successMessage').classList.remove('d-none');
+        document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        
+        console.log('Receta enviada con éxito!');
+    }
+}
+
+    </script>
+</body>
+</html>
